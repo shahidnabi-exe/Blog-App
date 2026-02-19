@@ -1,17 +1,17 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
-const express = require('express')
-const path = require('path')
+import express  from 'express'
 const app = express()
 
-const Blog = require('./models/blog')
+import Blog  from './models/blog.js'
 
-const userRoute = require('./routes/user')
-const blogRoute = require('./routes/blog')
+import userRoute  from './routes/user.js'
+import blogRoute  from './routes/blog.js'
 
-const mongoose = require('mongoose')
-const cookieParser = require('cookie-parser')
-const { checkForAuthCookie } = require('./middlewares/auth')
+import mongoose  from 'mongoose'
+import cookieParser  from 'cookie-parser'
+import { checkForAuthCookie }  from './middlewares/auth.js'
 
 const PORT = process.env.PORT || 8000;
 

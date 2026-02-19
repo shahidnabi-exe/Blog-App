@@ -1,4 +1,7 @@
-const User = require("../models/user");
+import {User} from '../models/user.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 
 export const SignUp = async(req, res) => {
   try {
@@ -48,7 +51,7 @@ export const SignUp = async(req, res) => {
 }
 
 // ---------------------- LOGIN ----------------------
-export const login = async (req, res) => {
+export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 

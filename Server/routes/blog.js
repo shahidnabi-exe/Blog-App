@@ -1,7 +1,6 @@
 const { Router } = require('express')
 const multer = require('multer')
 
-const Comment = require('../models/comment')
 const { getBlogById, addComment, getAllBlogs, createBlog, deleteBlog } = require('../controller/blog')
 
 const router = Router()
@@ -28,4 +27,4 @@ router.post('/', upload.single('coverImage'), createBlog)
 
 router.delete('/:id', deleteBlog)
 
-module.exports = router;
+export default router;

@@ -1,7 +1,6 @@
-const { ModifiedPathsSnapshot } = require('mongoose');
 const { validateToken } = require('../services/auth')
 
-function checkForAuthCookie(cookieName) {
+export function checkForAuthCookie(cookieName) {
     return(req, res, next) => {
         const tokenCookieValue = req.cookies[cookieName]
         if(!tokenCookieValue) {
@@ -19,8 +18,4 @@ function checkForAuthCookie(cookieName) {
 
 
 
-// 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  my github token     
 
-module.exports = {
-    checkForAuthCookie,
-}

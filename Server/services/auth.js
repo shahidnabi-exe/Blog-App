@@ -1,4 +1,4 @@
-const JWT = require('jsonwebtoken')
+import JWT from ('jsonwebtoken')
 
 const secret = "$uperMan@123"
 

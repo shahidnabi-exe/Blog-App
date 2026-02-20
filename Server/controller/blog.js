@@ -1,5 +1,5 @@
-const Blog = require('../models/blog')
-const Comment = require('../models/comment')
+import Blog from '../models/blog.js'
+import Comment from '../models/comment.js'
 
 export const createBlog = async (req, res) => {
     try {

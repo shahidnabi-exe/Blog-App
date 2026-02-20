@@ -1,7 +1,7 @@
-const { Router } = require('express')
-const multer = require('multer')
+import { Router } from 'express'
+import multer from 'multer'
 
-const { getBlogById, addComment, getAllBlogs, createBlog, deleteBlog } = require('../controller/blog')
+import { getBlogById, addComment, getAllBlogs, createBlog, deleteBlog } from '../controller/blog.js'
 
 const router = Router()
 

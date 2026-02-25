@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-
+import { UserData } from "../../Context/authContext";
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout } = UserData();
 
   return (
     <nav className="bg-slate-800 text-white px-8 py-4 flex justify-between">

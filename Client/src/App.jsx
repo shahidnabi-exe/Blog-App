@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/layout/Navbar";
-import Home from "./pages/Home";
-import BlogDetails from "./pages/BlogDetails";
-import CreateBlog from "./pages/CreateBlog";
-import Signin from "./pages/Signin";
-import Signup from "./pages/Signup";
+import Navbar from "./Components/Layout/Navbar";
+import Home from "./Pages/Home";
+import BlogDetails from "./Pages/Blog/BlogDetails";
+import CreateBlog from "./Pages/Blog/CreateBlog";
+import Signin from "./Pages/Auth/Login";
+import Signup from "./Pages/Auth/SignUp";
 
 function App() {
   return (

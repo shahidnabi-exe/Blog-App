@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { UserData } from '../../Context/authContext';
+import { useState } from 'react';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -43,7 +46,7 @@ function SignUp() {
                 
             </form>
             <p>
-                Already have an Account? <Link to='/login'> Login </Link>
+                Already have an Account? <Link to='/signin'> Login </Link>
             </p>
         </div>
     </div>

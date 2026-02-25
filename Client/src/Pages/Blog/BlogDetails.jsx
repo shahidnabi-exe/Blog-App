@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "../services/api";
-import CommentSection from "../components/blog/CommentSection";
+import axios from "../../Services/api";
+import CommentSection from "../../Components/Blog/CommentSection";
 
 export default function BlogDetails() {
   const { id } = useParams();

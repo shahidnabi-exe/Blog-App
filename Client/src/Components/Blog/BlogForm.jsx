@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../../services/api";
+import axios from "../../Services/api";
 import { useNavigate } from "react-router-dom";
 
 export default function BlogForm() {

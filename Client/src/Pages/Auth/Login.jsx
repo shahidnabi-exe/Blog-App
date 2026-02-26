@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserData } from '../../Context/authContext';
+import './Auth.css'
 
 function Login() {
   const navigate = useNavigate();

@@ -1,36 +1,35 @@
 import { Link } from "react-router-dom";
 import { UserData } from "../../Context/authContext";
+import './navbar.css';
+
 export default function Navbar() {
   const { user, logout } = UserData();
 
   return (
-    <nav className="bg-slate-800 text-white px-8 py-4 flex justify-between">
-      <Link to="/" className="font-bold text-xl">Blogify</Link>
+    <nav className="navbar">
+      <Link to="/" className="navbar-brand">Blogify</Link>
 
-      <div className="flex items-center gap-6">
+      <div className="navbar-links">
         <Link to="/">Home</Link>
 
         {user ? (
           <>
             <Link to="/blog/new">Add Blog</Link>
 
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-                {user.fullname[0]}
+            <div className="navbar-user">
+              <div className="nav-avatar">
+                {user.name[0]}
               </div>
-              <button onClick={logout}>Logout</button>
+              <button onClick={logout} className="nav-btn-logout">Logout</button>
             </div>
           </>
         ) : (
           <>
             <Link to="/signup">Create Account</Link>
-            <Link to="/signin" className="bg-blue-600 px-3 py-1 rounded">
-              Sign In
-            </Link>
+            <Link to="/signin">Sign In</Link>
           </>
         )}
       </div>
     </nav>
   );
 }
-

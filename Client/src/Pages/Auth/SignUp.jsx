@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { UserData } from '../../Context/authContext';
 import { useState } from 'react';
+import './Auth.css'
 
 function SignUp() {
     const navigate = useNavigate();

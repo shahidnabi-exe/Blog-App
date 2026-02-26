@@ -1,5 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
+import cors from 'cors'
+
 
 import express  from 'express'
 const app = express()
@@ -14,6 +16,12 @@ import cookieParser  from 'cookie-parser'
 import { checkForAuthCookie }  from './middlewares/auth.js'
 
 const PORT = process.env.PORT || 8000;
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}))
+
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -36,8 +44,8 @@ app.get('/', async (req, res) => {
     })
 })
 
-app.use('/user', userRoute)
-app.use('/blog', blogRoute)
+app.use('/api/user', userRoute)
+app.use('/api/blog', blogRoute)
 
 
 

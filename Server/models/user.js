@@ -3,7 +3,7 @@ import { createTokenForUser } from '../services/auth.js';
 
 const userSchema = new Schema(
     {
-        fullname: {
+        name: {
             type: String,
             required: true,
         },

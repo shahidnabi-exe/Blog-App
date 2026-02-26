@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
     async function loginUser(email, password, navigate) {
         setBtnLoading(true);
         try{
-            const { data } = await axios.post(`${server}/api/user/login`, {
+            const { data } = await axios.post(`${server}/api/user/signin`, {
                 email, 
                 password,
             });
@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
     async function registerUser(name, email, password, navigate) {
         setBtnLoading(true);
         try{
-            const { data } = await axios.post(`${server}/api/user/register`, {
+            const { data } = await axios.post(`${server}/api/user/signup`, {
                 name,
                 email, 
                 password,
@@ -50,7 +50,7 @@ export const AuthContextProvider = ({ children }) => {
             toast.success(data.message);
             // localStorage.setItem('token', data.token);
             setBtnLoading(false);
-            navigate('/login')
+            navigate('/signin')
         } catch(error) {
             setBtnLoading(false);            
             const message =

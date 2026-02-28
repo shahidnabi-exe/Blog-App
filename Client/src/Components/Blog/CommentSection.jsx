@@ -1,45 +1,49 @@
 import { useState, useEffect } from "react";
-import axios from "../../Services/api";
+import axios from "axios";
 import { UserData } from "../../Context/authContext";
+import { server } from "../../config/server";
 import toast from "react-hot-toast";
+import '../../Pages/Blog/blogdetails.css';
 
 const CommentSection = ({ blogId }) => {
   const { user, isAuth } = UserData();
-
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ fetch comments
   async function fetchComments() {
     try {
-      const { data } = await axios.get(`/api/comment/${blogId}`);
+      const { data } = await axios.get(`${server}/api/blog/comment/${blogId}`);
       setComments(data.comments || []);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to fetch comments:", error);
     }
   }
 
-  // ✅ add comment
   async function handleAddComment(e) {
     e.preventDefault();
 
     if (!text.trim()) return toast.error("Write something");
 
     setLoading(true);
-
     try {
-      const { data } = await axios.post(`/api/comment/add/${blogId}`, {
-        text,
-      });
+      const token = localStorage.getItem("token");
+
+      const { data } = await axios.post(
+        `${server}/api/blog/comment/${blogId}`,
+        { content: text },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       toast.success(data.message || "Comment added");
       setText("");
       fetchComments();
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Failed to add comment"
-      );
+      toast.error(error.response?.data?.message || "Failed to add comment");
     } finally {
       setLoading(false);
     }
@@ -50,53 +54,49 @@ const CommentSection = ({ blogId }) => {
   }, [blogId]);
 
   return (
-    <div className="mt-10">
-      <h3 className="text-xl font-semibold mb-4">Comments</h3>
+    <div>
+      <h3>Comments</h3>
 
-      {/* Add comment */}
-      {isAuth && (
-        <form
-          onSubmit={handleAddComment}
-          className="flex gap-3 mb-6"
-        >
+      {/* Add comment — only shown when logged in */}
+      {isAuth ? (
+        <form onSubmit={handleAddComment} className="comment-form">
           <input
             type="text"
             placeholder="Write a comment..."
             value={text}
             onChange={(e) => setText(e.target.value)}
-            className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="comment-input"
           />
-
-          <button
-            disabled={loading}
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
-          >
+          <button disabled={loading} className="comment-submit-btn">
             {loading ? "Posting..." : "Post"}
           </button>
         </form>
+      ) : (
+        <p className="comment-empty">Please sign in to add a comment.</p>
       )}
 
       {/* Comments list */}
-      <div className="space-y-4">
+      <div className="comment-list">
         {comments.length === 0 && (
-          <p className="text-gray-500">No comments yet</p>
+          <p className="comment-empty">No comments yet. Be the first!</p>
         )}
 
         {comments.map((c) => (
-          <div
-            key={c._id}
-            className="border rounded-lg p-4 bg-white shadow-sm"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-medium text-gray-800">
-                {c.user?.name || "User"}
-              </span>
-              <span className="text-xs text-gray-500">
+          <div key={c._id} className="comment-item">
+            <div className="comment-item-header">
+              <div className="comment-item-author">
+                <div className="comment-author-avatar">
+                  {c.createdBy?.name?.[0] || "U"}
+                </div>
+                <span className="comment-author-name">
+                  {c.createdBy?.name || "User"}
+                </span>
+              </div>
+              <span className="comment-item-date">
                 {new Date(c.createdAt).toLocaleDateString()}
               </span>
             </div>
-
-            <p className="text-gray-700">{c.text}</p>
+            <p className="comment-item-text">{c.content}</p>
           </div>
         ))}
       </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import axios from "../../Services/api";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 export default function BlogForm() {
   const [title, setTitle] = useState("");

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from "../../Services/api";
+import axios from "axios"
+import api from '../../services/api';
 import { UserData } from '../../Context/authContext';
 import toast from 'react-hot-toast';
+import './createblog.css'
+import { server } from '../../config/server';
 
 function CreateBlog() {
   const navigate = useNavigate();
@@ -11,10 +14,20 @@ function CreateBlog() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [btnLoading, setBtnLoading] = useState(false);
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const removeImage = () => {
+    setImage(null);
+    setPreview(null);
   };
 
   const submitHandler = async (e) => {
@@ -28,12 +41,12 @@ function CreateBlog() {
     try {
       const formData = new FormData();
       formData.append('title', title);
-      formData.append('content', content);
-      if (image) formData.append('image', image);
+      formData.append('body', content);
+      if (image) formData.append('coverImage', image);
 
       const token = localStorage.getItem('token');
 
-      const { data } = await axios.post('/api/blog/create', formData, {
+      const { data } = await axios.post(`${server}/api/blog`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -41,10 +54,7 @@ function CreateBlog() {
       });
 
       toast.success(data.message || 'Blog created successfully');
-      setTitle('');
-      setContent('');
-      setImage(null);
-      navigate('/'); // redirect to homepage or blogs list
+      navigate('/');
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || 'Failed to create blog');
@@ -54,52 +64,97 @@ function CreateBlog() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-6">Create Blog</h2>
+    <div className="create-blog-page">
+      <div className="create-blog-card">
 
-      <form onSubmit={submitHandler} className="flex flex-col gap-4">
-        <label>
-          Title
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full border rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter blog title"
-          />
-        </label>
+        <div className="create-blog-header">
+          <h2>Write a New Blog</h2>
+          <p>Share your thoughts, ideas, and stories with the world</p>
+        </div>
 
-        <label>
-          Content
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full border rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows={8}
-            placeholder="Write your blog content here..."
-          />
-        </label>
+        <form onSubmit={submitHandler} className="create-blog-form">
 
-        <label>
-          Image (optional)
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="mt-1"
-          />
-        </label>
+          {/* Title */}
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Give your blog a compelling title..."
+              required
+            />
+          </div>
 
-        <button
-          type="submit"
-          disabled={btnLoading}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-        >
-          {btnLoading ? 'Posting...' : 'Create Blog'}
-        </button>
-      </form>
+          {/* Content */}
+          <div className="form-group">
+            <label htmlFor="content">Content</label>
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Write your blog content here..."
+              rows={10}
+              required
+            />
+            <span className="char-count">{content.length} characters</span>
+          </div>
+
+          {/* Image Upload */}
+          <div className="form-group">
+            <label>Cover Image <span className="optional">(optional)</span></label>
+
+            {!preview ? (
+              <label className="upload-area" htmlFor="cover-image">
+                <div className="upload-icon">📷</div>
+                <p className="upload-text">Click to upload a cover image</p>
+                <p className="upload-hint">PNG, JPG, WEBP supported</p>
+                <input
+                  id="cover-image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  hidden
+                />
+              </label>
+            ) : (
+              <div className="image-preview-wrapper">
+                <img src={preview} alt="Cover preview" className="image-preview" />
+                <button type="button" className="remove-image-btn" onClick={removeImage}>
+                  ✕ Remove
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Actions */}
+          <div className="form-actions">
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => navigate('/')}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={btnLoading}
+              className="submit-btn"
+            >
+              {btnLoading ? (
+                <span className="btn-loading">
+                  <span className="spinner" /> Publishing...
+                </span>
+              ) : (
+                'Publish Blog'
+              )}
+            </button>
+          </div>
+
+        </form>
+      </div>
     </div>
   );
 }
-
 export default CreateBlog;

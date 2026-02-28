@@ -1,7 +1,5 @@
 import JWT from 'jsonwebtoken'
 
-const secret = "$uperMan@123"
-
 export function createTokenForUser(user) {
     const payload = {
         _id: user._id,
@@ -9,12 +7,11 @@ export function createTokenForUser(user) {
         profileImgURL: user.profileImgURL,
         role: user.role,
     };
-    const token = JWT.sign(payload, secret)
+    const token = JWT.sign(payload, process.env.JWT_SECRET)
     return token;
 }
 
 export function validateToken(token) {
-    const payload = JWT.verify(token, secret)
+    const payload = JWT.verify(token, process.env.JWT_SECRET)
     return payload;
 }
-

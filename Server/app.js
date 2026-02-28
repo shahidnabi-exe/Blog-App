@@ -1,6 +1,9 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import cors from 'cors'
+import path from 'path'
+
+
 
 
 import express  from 'express'
@@ -27,7 +30,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(checkForAuthCookie('token'))
-
+app.use(express.static(path.resolve('./public')))
 
 mongoose
   .connect(process.env.MONGO_URL)

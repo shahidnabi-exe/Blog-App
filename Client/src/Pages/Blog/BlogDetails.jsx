@@ -1,32 +1,74 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "../../Services/api";
+import axios from 'axios';
 import CommentSection from "../../Components/Blog/CommentSection";
+import { server } from "../../config/server";
+import './BlogDetails.css';
 
 export default function BlogDetails() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`/blog/${id}`).then(res => setBlog(res.data));
+    axios.get(`${server}/api/blog/${id}`)
+      .then(res => {
+        setBlog(res.data.blog);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Failed to fetch blog:", err);
+        setLoading(false);
+      });
   }, [id]);
 
-  if (!blog) return null;
+  if (loading) return <div className="blog-details-loading">Loading...</div>;
+  if (!blog) return <div className="blog-details-error">Blog not found.</div>;
 
   return (
-    <div className="max-w-3xl mx-auto py-10">
-      <h1 className="text-3xl font-serif mb-4">{blog.title}</h1>
+    <div className="blog-details-page">
+      <div className="blog-details-container">
 
-      <img
-        src={`http://localhost:8000/${blog.coverImageURL}`}
-        className="rounded mb-6"
-      />
+        {/* Title only at top */}
+        <h1 className="blog-details-title">{blog.title}</h1>
 
-      <p className="whitespace-pre-wrap mb-8">
-        {blog.body}
-      </p>
+        <hr className="blog-details-divider" />
 
-      <CommentSection blogId={id} />
+        {/* Cover image */}
+        {blog.coverImageURL && (
+          <img
+            src={`${server}/${blog.coverImageURL}`}
+            alt={blog.title}
+            className="blog-details-cover"
+          />
+        )}
+
+        {/* Blog body */}
+        <p className="blog-details-body">{blog.body}</p>
+
+        {/* Meta moved here — above comments */}
+        <div className="blog-details-meta">
+          <div className="blog-details-avatar">
+            {blog.createdBy?.name?.[0] || "U"}
+          </div>
+          <div className="blog-details-meta-info">
+            <span className="blog-details-author">
+              {blog.createdBy?.name || "Unknown"}
+            </span>
+            <span className="blog-details-date">
+              {new Date(blog.createdAt).toDateString()}
+            </span>
+          </div>
+        </div>
+
+        <hr className="blog-details-divider" />
+
+        {/* Comments */}
+        <div className="blog-details-comments">
+          <CommentSection blogId={id} />
+        </div>
+
+      </div>
     </div>
   );
 }

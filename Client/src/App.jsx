@@ -5,6 +5,8 @@ import BlogDetails from "./Pages/Blog/BlogDetails";
 import CreateBlog from "./Pages/Blog/CreateBlog";
 import Signin from "./Pages/Auth/Login";
 import Signup from "./Pages/Auth/SignUp";
+import MyBlogs from "./Pages/Blog/MyBlogs";
+import EditBlog from "./Pages/Blog/EditBlog";
 
 function App() {
   return (
@@ -16,6 +18,10 @@ function App() {
         <Route path="/blog/new" element={<CreateBlog />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/my-blogs" element={<MyBlogs />} />
+        <Route path="/blog/edit/:id" element={<EditBlog />} />
+
+
       </Routes>
     </BrowserRouter>
   );

@@ -79,6 +79,12 @@ export const AuthContextProvider = ({ children }) => {
         setLoading(false);
     }
 }
+    function logout() {
+    localStorage.removeItem('token');
+    setUser(null);
+    setIsAuth(false);
+    toast.success("Logged out successfully");
+}
 
 
     useEffect(() => {
@@ -86,7 +92,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [])
         
     return <authContext.Provider 
-        value = {{ user, setUser, setIsAuth, isAuth, loginUser, btnLoading, loading, registerUser,
+        value = {{ user, setUser, setIsAuth, isAuth, loginUser, btnLoading, loading, registerUser, logout
         }}>
             {children}  
             <Toaster/>

@@ -1,0 +1,209 @@
+/* ─── Page ───────────────────────────────────────────────────── */
+.myblogs-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 48px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.myblogs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.myblogs-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.myblogs-create-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: #8a4baf;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.myblogs-create-btn:hover {
+  background: #7c3aad;
+}
+
+/* ─── Empty state ────────────────────────────────────────────── */
+.myblogs-empty {
+  text-align: center;
+  padding: 64px 20px;
+  color: #9ca3af;
+}
+
+.myblogs-empty p {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.myblogs-empty a {
+  color: #8a4baf;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.myblogs-empty a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Loading ────────────────────────────────────────────────── */
+.myblogs-loading {
+  text-align: center;
+  padding: 80px 20px;
+  font-size: 15px;
+  color: #9ca3af;
+}
+
+/* ─── Grid ───────────────────────────────────────────────────── */
+.myblogs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ─── Blog card ──────────────────────────────────────────────── */
+.myblog-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.myblog-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.09),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ─── Cover image ────────────────────────────────────────────── */
+.myblog-cover {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.myblog-cover-placeholder {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+/* ─── Card body ──────────────────────────────────────────────── */
+.myblog-body {
+  padding: 18px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.myblog-date {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+.myblog-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+}
+
+.myblog-excerpt {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+/* ─── Card actions ───────────────────────────────────────────── */
+.myblog-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.myblog-edit-btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #8a4baf;
+  background: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 7px;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.myblog-edit-btn:hover {
+  background: #f3e8ff;
+  border-color: #d8b4fe;
+}
+
+.myblog-delete-btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ef4444;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.myblog-delete-btn:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}   
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .myblogs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .myblogs-page {
+    padding: 32px 20px;
+  }
+
+  .myblogs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .myblogs-header h1 {
+    font-size: 22px;
+  }
+}

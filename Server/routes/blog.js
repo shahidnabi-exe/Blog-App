@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import multer from 'multer'
-
-import { getBlogById, addComment, getAllBlogs, createBlog, deleteBlog } from '../controller/blog.js'
+import path from 'path'
+import { getBlogById, addComment, getAllBlogs, createBlog, deleteBlog, getCommentsByBlog, updateBlog } from '../controller/blog.js'
 
 const router = Router()
 
@@ -22,6 +22,10 @@ router.get('/', getAllBlogs)
 router.get('/:id', getBlogById)
 
 router.post('/comment/:blogId', addComment)
+
+router.get('/comment/:blogId', getCommentsByBlog)
+
+router.put('/:id', updateBlog)
 
 router.post('/', upload.single('coverImage'), createBlog)
 

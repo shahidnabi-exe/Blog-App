@@ -4,8 +4,9 @@ export default function BlogCard({ blog }) {
   return (
     <div className="rounded-xl shadow hover:shadow-lg overflow-hidden bg-white">
       <img
-        src={`http://localhost:8000/${blog.coverImageURL}`}
+        src={blog.coverImageURL ? `http://localhost:8000/${blog.coverImageURL}` : "/placeholder.jpg"}
         className="h-40 w-full object-cover"
+        alt={blog.title}
       />
 
       <div className="p-4">

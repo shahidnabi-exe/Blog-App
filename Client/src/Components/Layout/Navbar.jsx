@@ -14,7 +14,8 @@ export default function Navbar() {
 
         {user ? (
           <>
-            <Link to="/blog/new">Add Blog</Link>
+            <Link to="/blog/new">Create Blog</Link>
+            <Link to="/my-blogs">My Blogs</Link>
 
             <div className="navbar-user">
               <div className="nav-avatar">

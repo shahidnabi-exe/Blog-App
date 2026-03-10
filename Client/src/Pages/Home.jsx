@@ -41,15 +41,17 @@ export default function Home() {
           {blogs.map(b => (
             <div key={b._id} className="blog-card">
 
-              {/* Cover image */}
-              {b.coverImageURL
-                ? <img
-                    src={`${server}/${b.coverImageURL}`}
-                    alt={b.title}
-                    className="blog-card-cover"
-                  />
-                : <div className="blog-card-cover-placeholder">📝</div>
-              }
+              {/* Clickable cover image */}
+              <Link to={`/blog/${b._id}`} className="blog-card-img-link">
+                {b.coverImageURL
+                  ? <img
+                      src={`${server}/${b.coverImageURL}`}
+                      alt={b.title}
+                      className="blog-card-cover"
+                    />
+                  : <div className="blog-card-cover-placeholder">📝</div>
+                }
+              </Link>
 
               {/* Body */}
               <div className="blog-card-body">
@@ -57,7 +59,10 @@ export default function Home() {
                   {new Date(b.createdAt).toDateString()}
                 </p>
 
-                <h2 className="blog-card-title">{b.title}</h2>
+                {/* Clickable title */}
+                <Link to={`/blog/${b._id}`} className="blog-card-title-link">
+                  <h2 className="blog-card-title">{b.title}</h2>
+                </Link>
 
                 {b.createdBy && (
                   <div className="blog-card-author">

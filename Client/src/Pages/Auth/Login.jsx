@@ -26,6 +26,7 @@ function Login() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
             required
           />
 
@@ -34,6 +35,7 @@ function Login() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
             required
           />
 

@@ -11,6 +11,7 @@ export default function Home() {
   useEffect(() => {
     axios.get("/api/blog")
       .then(res => {
+        const data = Array.isArray(res.data) ? res.data : res.data.blogs || [];
         setBlogs(res.data);
         setLoading(false);
       })

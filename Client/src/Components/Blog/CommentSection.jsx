@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { UserData } from "../../Context/authContext";
+import { UserData } from "../../Context/AuthContext";
 import { server } from "../../config/server";
 import toast from "react-hot-toast";
 import '../../Pages/Blog/blogdetails.css';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { UserData } from '../../Context/authContext';
+import { UserData } from '../../Context/AuthContext';
 import './Auth.css'
 
 function SignUp() {

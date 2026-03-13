@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { server } from "../../config/server";
-import { UserData } from "../../Context/authContext";
+import { UserData } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import './myblog.css'
 

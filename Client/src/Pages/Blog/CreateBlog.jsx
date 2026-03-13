@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import api from '../../services/api';
-import { UserData } from '../../Context/authContext';
+import { UserData } from '../../Context/AuthContext';
 import toast from 'react-hot-toast';
 import './createblog.css'
 import { server } from '../../config/server';

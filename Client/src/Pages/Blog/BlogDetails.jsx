@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import CommentSection from "../../Components/Blog/CommentSection";
 import { server } from "../../config/server";
-import './blogDetails.css';
+import './blogdetails.css';
 
 export default function BlogDetails() {
   const { id } = useParams();

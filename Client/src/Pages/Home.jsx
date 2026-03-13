@@ -46,7 +46,7 @@ export default function Home() {
               <Link to={`/blog/${b._id}`} className="blog-card-img-link">
                 {b.coverImageURL
                   ? <img
-                      src={`${server}/${b.coverImageURL}`}
+                      src={b.coverImageURL}
                       alt={b.title}
                       className="blog-card-cover"
                     />

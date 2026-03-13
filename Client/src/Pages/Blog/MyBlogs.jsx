@@ -61,7 +61,7 @@ return (
       {blogs.map((b) => (
         <div key={b._id} className="myblog-card">
           {b.coverImageURL
-            ? <img src={`http://localhost:8000/${b.coverImageURL}`} alt={b.title} className="myblog-cover" />
+            ? <img src={b.coverImageURL} alt={b.title} className="myblog-cover" />
             : <div className="myblog-cover-placeholder">📝</div>
           }
           <div className="myblog-body">

@@ -15,9 +15,9 @@ export const createBlog = async (req, res) => {
 
         const blog = await Blog.create({
             title,
-            body,
+            body,   
             createdBy: req.user._id,
-            coverImageURL: req.file ? `uploads/${req.file.filename}` : null
+            coverImageURL: req.file ? req.file.path : null
         })
 
         return res.status(201).json({

@@ -37,7 +37,7 @@ export default function BlogDetails() {
         {/* Cover image */}
         {blog.coverImageURL && (
           <img
-            src={`${server}/${blog.coverImageURL}`}
+            src={blog.coverImageURL}
             alt={blog.title}
             className="blog-details-cover"
           />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../services/api";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { server } from "../config/server";
 import './Home.css';

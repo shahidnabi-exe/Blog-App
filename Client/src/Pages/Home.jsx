@@ -9,17 +9,17 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("/api/blog")
-      .then(res => {
-        const data = Array.isArray(res.data) ? res.data : res.data.blogs || [];
-        setBlogs(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Failed to fetch blogs:", err);
-        setLoading(false);
-      });
-  }, []);
+  axios.get(`${server}/api/blog`)   
+    .then(res => {
+      const data = Array.isArray(res.data) ? res.data : res.data.blogs || [];
+      setBlogs(data);              
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error("Failed to fetch blogs:", err);
+      setLoading(false);
+    });
+}, []);
 
   return (
     <div className="home-page">

@@ -17,8 +17,10 @@ import { checkForAuthCookie } from './middlewares/auth.js'
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-  origin: 'http://localhost:5173',
-  
+  origin: [
+    'http://localhost:5173',
+    'https://blog-app-hex8.vercel.app/'
+  ],
   credentials: true,
 }))
 

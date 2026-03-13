@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../config/server";
 import toast from "react-hot-toast";
-import './CreateBlog.css';
+import './createBlog.css';
 
 export default function EditBlog() {
   const { id } = useParams();

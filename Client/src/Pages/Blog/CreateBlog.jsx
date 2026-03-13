@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
-import api from '../../Services/api.js';
 import { UserData } from '../../Context/AuthContext';
 import toast from 'react-hot-toast';
 import './createblog.css'

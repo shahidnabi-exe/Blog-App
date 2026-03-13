@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 import { UserData } from '../../Context/AuthContext';
 import toast from 'react-hot-toast';
-import './createblog.css'
+import './CreateBlog.css'
 import { server } from '../../config/server';
 
 function CreateBlog() {

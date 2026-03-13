@@ -1,1 +1,1 @@
-export const server = "https://your-backend.vercel.app";
+export const server = "https://blog-app-xi-ruddy.vercel.app/.vercel.app";

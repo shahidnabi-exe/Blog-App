@@ -39,12 +39,18 @@ mongoose
 
 
 
+// remove this:
 app.get('/', async (req, res) => {
     const allBlogs = await Blog.find({});
     res.render('home', {
       user: req.user, 
       blogs: allBlogs   
     })
+})
+
+// replace with this:
+app.get('/', (req, res) => {
+    res.json({ message: "Blog API is running" })
 })
 
 app.use('/api/user', userRoute)

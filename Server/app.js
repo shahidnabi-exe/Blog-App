@@ -19,7 +19,8 @@ const PORT = process.env.PORT || 8000;
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://blog-app-mfgi.vercel.app'  ],
+    'https://blogifybyshahid.vercel.app' 
+   ],
   credentials: true,
 }))
 

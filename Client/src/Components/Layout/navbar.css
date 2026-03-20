@@ -2,19 +2,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 16px 24px;
   background-color: #fff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
+  z-index: 100;
 }
 
 .navbar-brand {
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   color: #8a4baf;
   text-decoration: none;
 }
 
+/* Desktop links */
 .navbar-links {
   display: flex;
   align-items: center;
@@ -24,18 +26,13 @@
 .navbar-links a {
   text-decoration: none;
   color: #333;
-  font-size: 16px;
-  transition: color 0.3s;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 .navbar-links a:hover {
   color: #8a4baf;
-}
-
-.navbar-user {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .nav-avatar {
@@ -58,25 +55,76 @@
   border: none;
   color: #333;
   cursor: pointer;
-  font-size: 16px;
-  transition: color 0.3s;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 .nav-btn-logout:hover {
   color: #8a4baf;
 }
 
+/* Hamburger — hidden on desktop */
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
+}
+
+.navbar-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .navbar-brand {
-    font-size: 18px;
+  .navbar-hamburger {
+    display: flex;
   }
 
   .navbar-links {
-    gap: 0.5rem;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 8px 0;
+  }
+
+  .navbar-links.open {
+    display: flex;
   }
 
   .navbar-links a,
   .nav-btn-logout {
-    font-size: 14px;
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .navbar-links a:hover,
+  .nav-btn-logout:hover {
+    background: #f9f5ff;
+    color: #8a4baf;
+  }
+
+  .nav-avatar {
+    margin: 8px 24px 4px;
   }
 }

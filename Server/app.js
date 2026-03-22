@@ -30,11 +30,22 @@ app.use(cookieParser())
 app.use(checkForAuthCookie('token'))
 app.use(express.static(path.resolve('./public')))
 
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection failed:', err.message));
 
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) return;
+  
+  await mongoose.connect(process.env.MONGO_URL, {
+    serverSelectionTimeoutMS: 30000,
+    socketTimeoutMS: 30000,
+  });
+  
+  isConnected = true;
+  console.log('MongoDB connected');
+};
+
+connectDB().catch(err => console.error('MongoDB connection failed:', err.message));
 app.get('/', (req, res) => {
     res.json({ message: "Blog API is running" })
 })
